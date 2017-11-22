@@ -9,31 +9,43 @@
     <link rel="stylesheet" type="text/css" href="${basePath}/css/all.css"/>
     <link rel="stylesheet" type="text/css" href="${basePath}/css/pop.css"/>
     <link rel="stylesheet" type="text/css" href="${basePath}/css/main.css"/>
+    <script src="${basePath}/js/common/jquery-1.8.3.js"></script>
+    <script src="${basePath}/js/content/adAdd.js"></script>
 </head>
 <body style="background: #e1e9eb;">
-<form id="mainForm" method="post">
+<form id="mainForm" method="post" action="${basePath}/ad/add" enctype="multipart/form-data">
+    <input type="hidden" id="message" value="${pageCode.msg}">
     <div class="right">
         <div class="current">当前位置：<a href="###">内容管理</a> &gt; 广告管理</div>
         <div class="rightCont">
             <p class="g_title fix">新增广告</p>
             <table class="tab1" width="100%">
                 <tbody>
-                <tr>
-                    <td align="right" width="10%">标题<font color="red">*</font>：</td>
-                    <td width="30%">
-                        <input id="title" value="学钢琴" name="title" class="allInput" style="width:100%;" type="text"/>
-                    </td>
-                    <td align="right" width="10%">链接地址<font color="red">*</font>：</td>
-                    <td width="30%">
-                        <input id="link" name="link" value="http://www.imooc.com/wap/index" class="allInput"
-                               style="width:100%;" type="text"/>
-                    </td>
-                </tr>
+                    <tr>
+                        <td align="right" width="10%">标题<font color="red">*</font>：</td>
+                        <td width="30%">
+                            <input id="title" name="title" class="allInput" style="width:100%;" type="text"/>
+                        </td>
+                        <td align="right" width="10%">上传图片<font color="red">*</font>:</td>
+                        <td width="30%">
+                            <input id="imgFile" name="imgFile" class="allInput" style="width:100%;" type="file"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" width="10%">链接地址<font color="red">*</font>：</td>
+                        <td width="30%">
+                            <input id="link" name="link"  class="allInput" style="width:100%;" type="text"/>
+                        </td>
+                        <td align="right" width="10%">权重(值越大排名越靠前)<font color="red">*</font>：</td>
+                        <td width="30%">
+                            <input id="weight" name="weight"  class="allInput" style="width:100%;" type="text"/>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div style="text-align: center; margin-top: 30px;">
-                <input class="tabSub" value="保     存" type="button"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="tabSub" value="返     回" type="button"/>
+                <input class="tabSub" value="保     存" type="button" onclick="add();"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="tabSub" value="返     回" type="button" onclick="goback();"/>
             </div>
         </div>
     </div>
