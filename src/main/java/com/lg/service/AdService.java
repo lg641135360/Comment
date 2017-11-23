@@ -14,4 +14,6 @@ public interface AdService {
     boolean add(AdDto adDto);
 
     List<AdDto> searchByPage(AdDto adDto);
+
+    boolean delete(Long id);
 }

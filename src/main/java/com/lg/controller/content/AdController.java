@@ -34,6 +34,7 @@ public class AdController {
 
     @RequestMapping("/remove")
     public String remove(@RequestParam("id")Long id){
+        adService.delete(id);
         return "forward:/ad";
     }
 

@@ -17,4 +17,8 @@
         </where>
         order by weight desc,id
     </select>
+    <delete id="deleteById" parameterType="long">
+        delete from ad
+        where id=#{id}
+    </delete>
 </mapper>

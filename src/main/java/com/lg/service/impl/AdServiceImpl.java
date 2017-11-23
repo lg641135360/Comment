@@ -66,4 +66,11 @@ public class AdServiceImpl implements AdService {
         }
         return result;
     }
+
+    public boolean delete(Long id) {
+        if (adDao.deleteById(id) > 0)
+            return true;
+        else
+            return false;
+    }
 }

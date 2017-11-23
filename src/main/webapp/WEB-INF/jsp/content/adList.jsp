@@ -17,6 +17,8 @@
 <body style="background: #e1e9eb;">
 <form action="${basePath}/ad/search" id="mainForm" method="post">
     <input type="hidden" name="page.currentPage" id="currentPage" value="1"/>
+    <input type="hidden" id="basePath" value="${basePath}">
+    <input type="hidden" id="id" name="id">
     <div class="right">
         <div class="current">当前位置：<a href="#">内容管理</a> &gt; 广告管理</div>
         <div class="rightCont">

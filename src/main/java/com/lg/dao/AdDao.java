@@ -13,4 +13,6 @@ public interface AdDao {
      * @return 返回查询出来的Ad实体 list集合
      */
     List<Ad> selectByPage(Ad condition);
+
+    int deleteById(Long id);
 }
