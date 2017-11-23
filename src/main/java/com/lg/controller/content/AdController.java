@@ -33,14 +33,38 @@ public class AdController {
     }
 
     @RequestMapping("/remove")
-    public String remove(@RequestParam("id")Long id){
-        adService.delete(id);
+    public String remove(@RequestParam("id")Long id,Model model){
+        if(adService.delete(id)) {
+            model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.REMOVE_SUCCESS);
+        } else {
+            model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.REMOVE_FAIL);
+        }
         return "forward:/ad";
     }
 
     @RequestMapping("/addInit")
     public String addInit(){
         return "/content/adAdd";
+    }
+
+    @RequestMapping("/modifyInit")
+    public String modifyInit(Model model, @RequestParam("id")Long id){
+        model.addAttribute("modifyObj", adService.getById(id));
+        return "/content/adModify";
+    }
+
+    /**
+     * 修改
+     */
+    @RequestMapping("/modify")
+    public String modify(Model model, AdDto adDto) {
+        model.addAttribute("modifyObj", adDto);
+        if (adService.modify(adDto)) {
+            model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.MODIFY_SUCCESS);
+        } else {
+            model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.MODIFY_FAIL);
+        }
+        return "/content/adModify";
     }
 
     @RequestMapping("/add")

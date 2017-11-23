@@ -4,6 +4,7 @@ import com.lg.bean.Ad;
 import com.lg.dao.AdDao;
 import com.lg.dto.AdDto;
 import com.lg.service.AdService;
+import com.lg.util.FileUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,10 +68,41 @@ public class AdServiceImpl implements AdService {
         return result;
     }
 
-    public boolean delete(Long id) {
-        if (adDao.deleteById(id) > 0)
-            return true;
-        else
+    public AdDto getById(Long id) {
+        AdDto result = new AdDto();
+        Ad ad = adDao.selectById(id);
+        BeanUtils.copyProperties(ad, result);
+        result.setImg(adImageUrl + ad.getImgFileName());
+        return result;
+    }
+
+    public boolean modify(AdDto adDto) {
+        Ad ad = new Ad();
+        BeanUtils.copyProperties(adDto, ad);
+        String fileName = null;
+        if (adDto.getImgFile() != null && adDto.getImgFile().getSize() > 0) {
+            try {
+                fileName = FileUtil.save(adDto.getImgFile(), adImageSavePath);
+                ad.setImgFileName(fileName);
+            } catch (Exception e) {
+                // TODO 需要添加日志
+                return false;
+            }
+        }
+        int updateCount = adDao.update(ad);
+        if (updateCount != 1) {
             return false;
+        }
+        if (fileName != null) {
+            return FileUtil.delete(adImageSavePath + adDto.getImgFileName());
+        }
+        return true;
+    }
+
+    public boolean delete(Long id) {
+        Ad ad = adDao.selectById(id);
+        int deleteRows = adDao.deleteById(id);
+        FileUtil.delete(adImageSavePath + ad.getImgFileName());
+        return deleteRows == 1;
     }
 }
