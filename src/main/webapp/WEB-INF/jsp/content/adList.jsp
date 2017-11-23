@@ -16,6 +16,7 @@
 </head>
 <body style="background: #e1e9eb;">
 <form action="${basePath}/ad/search" id="mainForm" method="post">
+    <input type="hidden" name="page.currentPage" id="currentPage" value="1"/>
     <div class="right">
         <div class="current">当前位置：<a href="#">内容管理</a> &gt; 广告管理</div>
         <div class="rightCont">
@@ -25,7 +26,7 @@
                 <tr>
                     <td align="right" width="80">标题：</td>
                     <td>
-                        <input id="title" value="" class="allInput" type="text"/>
+                        <input id="title" name="title" value="" class="allInput" type="text"/>
                     </td>
                     <td style="text-align: right;" width="150">
                         <input class="tabSub" value="查询" onclick="search('1');" type="button"/>
@@ -53,7 +54,7 @@
                             <td>${item.link}</td>
                             <td>
                                 <a href="javascript:void(0);" onclick="modifyInit(${item.id})">修改</a>
-                                <a href="javascript:void(0);" onclick="del(${item.id})">删除</a>
+                                <a href="javascript:void(0);" onclick="remove(${item.id})">删除</a>
                             </td>
                         </tr>
                     </c:forEach>

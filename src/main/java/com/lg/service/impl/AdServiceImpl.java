@@ -23,6 +23,9 @@ public class AdServiceImpl implements AdService {
     @Value("${adImage.savePath}")
     private String adImageSavePath;
 
+    @Value("${adImage.url}")
+    private String adImageUrl;
+
     //TODO 可以改成获取失败详细原因
     public boolean add(AdDto adDto) {
         Ad ad = new Ad();
@@ -58,6 +61,7 @@ public class AdServiceImpl implements AdService {
         for (Ad ad : adList) {
             AdDto adDtoTemp = new AdDto();
             result.add(adDtoTemp);
+            adDtoTemp.setImg(adImageUrl + ad.getImgFileName());
             BeanUtils.copyProperties(ad,adDtoTemp);
         }
         return result;

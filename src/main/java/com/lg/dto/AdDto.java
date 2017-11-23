@@ -1,8 +1,10 @@
 package com.lg.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.lg.bean.Ad;
 import org.springframework.web.multipart.MultipartFile;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AdDto extends Ad {
     private String img;
 
